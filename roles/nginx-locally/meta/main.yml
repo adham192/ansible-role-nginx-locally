@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Adham Mohamed Saber
+  description: An Ansible role to install and configure Nginx locally.
+  company: none
+  license: MIT
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+
+  galaxy_tags:
+    - web
+    - nginx
+    - system
+
+dependencies: []

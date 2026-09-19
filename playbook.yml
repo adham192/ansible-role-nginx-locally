@@ -1,0 +1,7 @@
+- name: Install Nginx Locally and Start it
+  hosts: local
+  become: true
+
+  roles:
+    - role: nginx-locally
+
