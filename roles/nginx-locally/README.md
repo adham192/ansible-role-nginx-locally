@@ -1,38 +1,44 @@
-Role Name
-=========
+Nginx Locally
+=============
 
-A brief description of the role goes here.
+An Ansible role to install, configure, and manage Nginx locally on Debian/Ubuntu systems with dynamic templating support.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* **Operating System:** Debian or Ubuntu Linux distribution.
+* **Privileges:** Sudo / Root access (`become: true`) to install packages and manage systemd services.
+* **Ansible Version:** `>= 2.14`
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables are defined in `defaults/main.yml` and can be overridden in your playbooks or inventory:
+
+| Variable | Default Value | Description |
+| :--- | :--- | :--- |
+| `nginx_package_name` | `nginx` | Name of the Nginx package to install. |
+| `nginx_service_name` | `nginx` | Name of the systemd service to manage. |
+| `nginx_web_root` | `/var/www/html` | Directory path where static web content is deployed. |
+| `server_title` | `"Local Nginx Server"` | Header/Title injected into the default `index.html` template. |
+| `welcome_message` | `"Configured via Ansible Role"` | Greeting message displayed on the generated landing page. |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None. This role does not depend on any third-party roles or collections from Ansible Galaxy.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+### Basic Usage (Localhost)
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+---
+- name: Set up local Nginx
+  hosts: localhost
+  connection: local
+  become: true
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+  roles:
+    - role: nginx-locally
